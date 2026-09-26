@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 
+// middleware
+app.use(express.json());
+
 // in-memory list of sample tasks
 const TASKS = [
     {id: 0, title: "Do laundry", done: false},
@@ -44,6 +47,27 @@ app.get(
         }
 
         res.status(200).json(task);
+    }
+)
+
+// POST
+app.post(
+    "/tasks", (req, res) => {
+        // check input first
+        const {title} = req.body;
+
+        if (!title) {
+            return res.status(400).json({error: "Title is required."});
+        }
+
+        const newTask = {
+            id: TASKS.length,
+            title: title,
+            done: false
+        };
+
+        TASKS.push(newTask);
+        res.status(201).json(newTask);
     }
 )
 
