@@ -1,0 +1,60 @@
+ # Task API
+
+ A small in-memory CRUD API built with Express. It manages tasks with an `id`,
+ `title`, and `done` status. Data is stored in memory and is reset whenever the
+ server restarts.
+
+ ## Install and run
+
+ From this directory, run:
+
+ ```bash
+ npm install && node index.js
+ ```
+
+ The API runs at `http://localhost:3000`.
+
+ Interactive Swagger documentation is available at:
+
+ `http://localhost:3000/docs/`
+
+ ## Endpoints
+
+ | Method | Endpoint | Description | Body |
+ | --- | --- | --- | --- |
+ | GET | `/` | Get API information | None |
+ | GET | `/health` | Check API health | None |
+ | GET | `/tasks` | Get all tasks | None |
+ | POST | `/tasks` | Create a task | `{ "title": "Buy milk" }` |
+ | GET | `/tasks/:id` | Get one task by ID | None |
+ | PUT | `/tasks/:id` | Update a task | `{ "title": "Buy milk", "done": true }` |
+ | DELETE | `/tasks/:id` | Delete a task | None |
+
+ Task IDs are numeric. The PUT endpoint preserves fields that are omitted from
+ the request body.
+
+ ## Example response
+
+ Command:
+
+ ```bash
+ curl -i http://localhost:3000/tasks
+ ```
+
+ Output:
+
+ ```text
+ HTTP/1.1 200 OK
+ X-Powered-By: Express
+ Content-Type: application/json; charset=utf-8
+ Content-Length: 129
+ 
+ [{"id":0,"title":"Do laundry","done":false},{"id":1,"title":"Cook rice","done":false},{"id":2,"title":"Take a bath","done":true}]
+ ```
+
+ ## Swagger UI
+
+ ![Swagger UI screenshot](swagger-ui.png)
+
+ Save the provided Swagger screenshot as `swagger-ui.png` in this directory so
+ the image appears here.
